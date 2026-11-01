@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "watermarkh"
+# 与 wmh/__init__.py 中的 __version__ 保持一致
+version = "1.2.0.0"
+description = "隐形水印工具（WaterMarkH 的 Python/tkinter 复刻版）—— 在频域嵌入与提取文本水印"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.26",
+    "Pillow>=10.0",
+]
+
+# uv tool install 后暴露的命令行入口（GUI 程序，启动后弹出 tkinter 窗口）
+[project.scripts]
+watermarkh = "wmh.app:run"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["wmh*"]
+
+# 把包内的图标作为数据文件一起打包，安装后也能用 importlib.resources 取到
+[tool.setuptools.package-data]
+wmh = ["assets/*.ico"]
